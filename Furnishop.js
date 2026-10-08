@@ -1,4 +1,3 @@
-// Mobile menu
 const burger = document.querySelector('.burger');
 const nav = document.getElementById('nav');
 burger.addEventListener('click', () => {
@@ -7,7 +6,6 @@ burger.addEventListener('click', () => {
 });
 nav.addEventListener('click', e => { if (e.target.tagName === 'A') nav.classList.remove('open'); });
 
-// Add-to-cart toggle
 document.querySelectorAll('.add').forEach(btn => {
   btn.addEventListener('click', () => {
     const on = btn.classList.toggle('added');
@@ -15,7 +13,6 @@ document.querySelectorAll('.add').forEach(btn => {
   });
 });
 
-// Product pager (5 pages; cards highlighted per page, visual state of dots/arrows)
 const dotsBox = document.querySelector('.pager__dots');
 const arrows = document.querySelectorAll('.pager__arrow');
 const PAGES = 5; let page = 0;
@@ -31,13 +28,11 @@ function go(n) {
   arrows[0].disabled = page === 0;
   arrows[1].disabled = page === PAGES - 1;
   const cards = [...document.querySelectorAll('#productGrid .card')];
-  // rotate the 8 products so each page shows a different order
   cards.forEach((c, i) => c.style.order = (i + page * 2) % cards.length);
 }
 arrows.forEach(a => a.addEventListener('click', () => go(page + Number(a.dataset.dir))));
 go(0);
 
-// Reviews slider
 const reviews = [
   { n: 'Josh Smith', r: 'Manager of The New York Times', t: '“They are have a perfect touch for make something so professional ,interest and useful for a lot of people .”' },
   { n: 'Anna Miller', r: 'Interior designer', t: '“Great quality and fast delivery. The furniture looks exactly like in the catalog.”' },
@@ -53,7 +48,6 @@ function showReview(i) {
 revPrev.addEventListener('click', () => showReview(ri - 1));
 revNext.addEventListener('click', () => showReview(ri + 1));
 
-// Newsletter validation
 newsForm.addEventListener('submit', e => {
   e.preventDefault();
   const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
@@ -67,13 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Активна кнопка
       tabs.forEach(btn => btn.classList.remove('active'));
       tab.classList.add('active');
 
       const filterValue = tab.getAttribute('data-filter');
 
-      // Фільтрація карток
       cards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filterValue === 'all' || category === filterValue) {
